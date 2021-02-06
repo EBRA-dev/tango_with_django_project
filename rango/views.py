@@ -1,6 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rango.models import Category, Page
+from rango.models import Category
+from rango.models import Page
+
+def about(request):
+    #visitor_cookie_handler(request)
+    #context_dict={'visits': request.session['visits']}
+    return render(request, 'rango/about.html')
+    # context=context_dict)
 
 
 def index(request):
@@ -8,15 +15,10 @@ def index(request):
     page_list = Page.objects.order_by('-views')[:5]
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
-    context_dict['categories'] = category_list
+    context_dict ['categories'] = category_list
     context_dict['pages'] = page_list
 
-
-
-    return render(request, 'rango/index.html', context = context_dict)
-    return response
-    response = render(request, 'rango/index.html', context = context_dict)
-
+    return render(request, 'rango/index.html', context=context_dict)
 
 def show_category(request, category_name_slug):
     context_dict = {}
